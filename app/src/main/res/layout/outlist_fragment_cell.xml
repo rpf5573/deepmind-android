@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="80dp"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+  <!-- Bottom View Start-->
+  <android.support.constraint.ConstraintLayout
+    android:background="@color/md_red_500"
+    android:id="@+id/bottom_wrapper"
+    android:layout_width="100dp"
+    android:layout_height="match_parent">
+    <Button
+      android:id="@id/outlist__cell__out"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      android:textSize="18sp"
+      android:text="@string/out"
+      android:textColor="@color/md_white_1000" />
+
+    <!--What you want to show-->
+  </android.support.constraint.ConstraintLayout>
+  <!-- Bottom View End-->
+
+  <!-- Surface View Start -->
+  <android.support.constraint.ConstraintLayout
+    android:id="@id/outlist__cell__surface"
+    android:background="#ffffff"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--What you want to show in SurfaceView-->
+
+    <TextView
+      android:id="@id/outlist__cell__name"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintLeft_toLeftOf="parent"
+      android:layout_marginStart="20dp"
+      android:textColor="@color/md_black_1000"
+      android:textAlignment="textStart"
+      android:textSize="24sp" />
+
+    <ImageView
+      android:id="@id/outlist__cell__silence"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:background="@color/md_grey_200"
+      android:alpha="0.6"
+      android:src="@drawable/restricted_player"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintLeft_toLeftOf="parent"
+      android:visibility="gone" />
+
+  </android.support.constraint.ConstraintLayout>
+  <!-- Surface View End -->
+</com.daimajia.swipe.SwipeLayout>

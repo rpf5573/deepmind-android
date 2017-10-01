@@ -1,0 +1,27 @@
+<resources>
+  <string name="app_name">DeepMind</string>
+  <string name="passwordHint">비밀번호</string>
+  <string name="complete">완료</string>
+  <string name="joker1">조커1</string>
+  <string name="joker2">조커2</string>
+  <string name="imageBtnDescription">Image Button Description</string>
+  <string name="joker_info_input">정보입력</string>
+  <string name="joker1_info">조커1 정보 입력</string>
+  <string name="joker2_info">조커2 정보 입력</string>
+  <string name="invalidName">5글자 초과</string>
+  <string name="map">전체지도</string>
+  <string name="point">가용포인트</string>
+  <string name="out">활동제한</string>
+  <string name="post">포스트</string>
+  <string name="select_menu">선택메뉴</string>
+  <string name="timer">타이머</string>
+  <string name="back">뒤로</string>
+  <string name="jokerInfoBuy">조커 정보 구매</string>
+  <string name="use2000point">2000포인트가 소모됩니다</string>
+  <string name="joker1InfoBuy">조커1정보 구매</string>
+  <string name="joker2InfoBuy">조커2정보 구매</string>
+  <string name="q_joker1InfoBuy">조커1정보를 구매하시겠습니까?</string>
+  <string name="select">선택</string>
+  <string name="postSelect">포스트선택</string>
+  <string name="colon">:</string>
+</resources>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <item name="toolbar" type="id"/>
+
+  <item name="login_activity" type="id"/>
+  <item name="login__container" type="id"/>
+  <item name="login__verticalStackView" type="id"/>
+  <item name="login__passwordEditText" type="id"/>
+  <item name="login__completeBtn" type="id"/>
+
+  <item name="register__activity" type="id"/>
+  <item name="register__mainContainer" type="id"/>
+  <item name="register__tabLayout" type="id"/>
+  <item name="register__viewPager" type="id"/>
+  <item name="register__memberNameEditText" type="id"/>
+  <item name="register__joker1_container" type="id" />
+  <item name="register__joker2_container" type="id" />
+  <item name="register__joker1NameEditText" type="id"/>
+  <item name="register__joker2NameEditText" type="id"/>
+  <item name="register__joker1NameEditText_layout" type="id"/>
+  <item name="register__joker2NameEditText_layout" type="id"/>
+  <item name="register__joker1InfoBtn" type="id"/>
+  <item name="register__joker2InfoBtn" type="id"/>
+  <item name="register__jokerInfoInputContainer" type="id"/>
+  <item name="register__jokerInfoTextInputLayout" type="id"/>
+  <item name="register__jokerInfoTextEditor" type="id"/>
+  <item name="register__complete" type="id"/>
+
+
+  <item name="mainFields__mainContainer" type="id"/>
+  <item name="mainFields__fragmentContainer" type="id"/>
+  <item name="mainFields__bottom_navigation" type="id"/>
+  <item name="mainFields__bottom_navigation_no_players" type="id"/>
+  <item name="mainFields__bottomNavigation__map" type="id"/>
+  <item name="mainFields__bottomNavigation__point" type="id"/>
+  <item name="mainFields__bottomNavigation__out" type="id"/>
+  <item name="mainFields__bottomNavigation__post" type="id"/>
+  <item name="mainFields__bottomNavigation__timer" type="id"/>
+
+  <item name="out__recyclerView" type="id"/>
+  <item name="out__recyclerView__teamButton" type="id"/>
+  <item name="out__recyclerView__indicator" type="id"/>
+
+  <item name="outlist__recyclerView" type="id"/>
+  <item name="outlist__cell__name" type="id"/>
+  <item name="outlist__cell__surface" type="id"/>
+  <item name="outlist__cell__out" type="id"/>
+  <item name="outlist__cell__silence" type="id"/>
+  <item name="outlist__bottomSheet__title" type="id"/>
+  <item name="outlist__bottomSheet__message" type="id"/>
+  <item name="outlist__bottomSheet__joker1BuyBtn" type="id"/>
+  <item name="outlist__bottomSheet__joker2BuyBtn" type="id"/>
+  <item name="outlist__jokerinfo__cell__question" type="id"/>
+  <item name="outlist__jokerinfo__cell__answer" type="id"/>
+
+  <item name="post__floatingActionMenu" type="id"/>
+  <item name="post__floatingActionMenu__post" type="id"/>
+  <item name="post__floatingActionMenu__upload" type="id"/>
+  <item name="post__floatingActionMenu__gallery" type="id"/>
+  <item name="post__floatingActionMenu__video" type="id"/>
+  <item name="post__floatingActionMenu__picture" type="id"/>
+
+  <item name="post__imageView" type="id"/>
+  <item name="post__videoView" type="id"/>
+  <item name="post__progressBtn" type="id"/>
+
+  <item name="postlist__recyclerView" type="id"/>
+  <item name="postlist__cell__select" type="id"/>
+  <item name="postlist__cell__surface" type="id"/>
+  <item name="postlist__cell__surface__post" type="id"/>
+  <item name="postlist__cell__surface__hosts" type="id"/>
+
+  <item name="timer__min" type="id"/>
+  <item name="timer__sec" type="id"/>
+  <item name="timer__mili" type="id"/>
+
+</resources>

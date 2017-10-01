@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+  <!-- Bottom View Start-->
+  <android.support.constraint.ConstraintLayout
+    android:background="@color/md_blue_500"
+    android:id="@+id/bottom_wrapper"
+    android:layout_width="80dp"
+    android:layout_height="match_parent">
+    <Button
+      android:id="@id/postlist__cell__select"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      android:text="@string/select"
+      android:textSize="18sp"
+      android:textColor="@color/md_white_1000" />
+  </android.support.constraint.ConstraintLayout>
+  <!-- Bottom View End-->
+
+  <!-- Surface View Start -->
+  <android.support.constraint.ConstraintLayout
+    android:id="@id/postlist__cell__surface"
+    android:padding="20dp"
+    android:background="#ffffff"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--What you want to show in SurfaceView-->
+
+    <TextView
+      android:id="@id/postlist__cell__surface__post"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:textAlignment="textStart"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      android:textColor="@color/md_black_1000"
+      android:textSize="24sp"/>
+
+    <TextView
+      android:id="@id/postlist__cell__surface__hosts"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      app:layout_constraintLeft_toLeftOf="@id/postlist__cell__surface__post"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      android:textAlignment="textEnd"
+      android:textColor="@color/md_green_500"
+      android:textSize="16sp"/>
+
+  </android.support.constraint.ConstraintLayout>
+  <!-- Surface View End -->
+</com.daimajia.swipe.SwipeLayout>

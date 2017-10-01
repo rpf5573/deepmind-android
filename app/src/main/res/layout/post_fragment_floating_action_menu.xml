@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fab:com.github.clans.fab.FloatingActionMenu
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/tools"
+  xmlns:fab="http://schemas.android.com/apk/res-auto"
+  android:id="@id/post__floatingActionMenu"
+
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:paddingStart="20dp"
+  android:paddingEnd="12dp"
+  android:paddingBottom="12dp"
+
+  fab:menu_labels_ellipsize="end"
+  fab:menu_labels_singleLine="true"
+  fab:menu_backgroundColor="#ccffffff"
+  fab:menu_labels_textSize="26sp">
+
+
+  <com.github.clans.fab.FloatingActionButton
+    android:id="@id/post__floatingActionMenu__post"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/ic_posts"
+    fab:fab_size="mini"
+    fab:fab_label="포스트"
+    fab:fab_colorPressed="@color/md_blue_400"
+    fab:fab_colorNormal="@color/md_blue_800" />
+  <com.github.clans.fab.FloatingActionButton
+    android:id="@id/post__floatingActionMenu__upload"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/ic_external_100"
+    fab:fab_size="mini"
+    fab:fab_label="업로드" />
+  <com.github.clans.fab.FloatingActionButton
+    android:id="@id/post__floatingActionMenu__gallery"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/ic_add_folder_100"
+    fab:fab_size="mini"
+    fab:fab_label="사진함" />
+  <com.github.clans.fab.FloatingActionButton
+    android:id="@id/post__floatingActionMenu__video"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/ic_video_call_100"
+    fab:fab_size="mini"
+    fab:fab_label="비디오" />
+  <com.github.clans.fab.FloatingActionButton
+    android:id="@id/post__floatingActionMenu__picture"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/ic_camera"
+    fab:fab_size="mini"
+    fab:fab_label="카메라" />
+</fab:com.github.clans.fab.FloatingActionMenu>

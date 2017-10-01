@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="rpf5573.simpli.co.kr.deepmind">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.hardware.camera.autofocus" />
+
+    <application
+      android:allowBackup="true"
+      android:icon="@mipmap/ic_launcher"
+      android:label="@string/app_name"
+      android:roundIcon="@mipmap/ic_launcher"
+      android:supportsRtl="true"
+      android:theme="@style/AppTheme.NoActionBar">
+        <activity
+          android:name=".application.entrance.login.LogInActivity"
+          android:screenOrientation="portrait"
+          android:configChanges="orientation|keyboardHidden|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+          android:name=".application.entrance.registers.RegisterActivity"
+          android:screenOrientation="portrait"
+          android:configChanges="orientation|keyboardHidden|screenSize"/>
+        <activity
+          android:name=".application.mainFields.MainFieldsActivity"
+          android:screenOrientation="portrait"
+          android:configChanges="orientation|keyboardHidden|screenSize"/>
+
+        <!--이거를 안적어주면,, 파일을 만들 수가 없어!-->
+        <provider
+          android:name=".helper.hFileProvider"
+          android:authorities="${applicationId}"
+          android:exported="false"
+          android:grantUriPermissions="true">
+            <meta-data
+              android:name="android.support.FILE_PROVIDER_PATHS"
+              android:resource="@xml/provider_paths"/>
+        </provider>
+
+    </application>
+
+</manifest>
