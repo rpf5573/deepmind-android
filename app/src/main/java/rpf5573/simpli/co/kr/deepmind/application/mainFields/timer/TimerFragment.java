@@ -78,32 +78,36 @@ public class TimerFragment extends SupportFragment {
   @Override
   public void onSupportVisible() {
     super.onSupportVisible();
-    getTime(new hCallBack() {
-      @Override
-      public void call(String json) {
-        Logger.d(json);
-        JSONObject jsonObj = null;
-        try {
-          jsonObj = new JSONObject(json);
-          int responseCode = jsonObj.getInt("response_code");
-          if (responseCode == 201) {
-            String json2 = jsonObj.getString("value");
-            JSONObject jsonObject2 = new JSONObject(json2);
-            int time = jsonObject2.getInt("time") * 1000;
-            go(time);
-          } else {
-            stop();
-            hAlert.show(getActivity(), jsonObj.getString("error_message"));
+    Logger.d("called");
+    if ( countDownTimer == null && countUpTimer == null ) {
+      getTime(new hCallBack() {
+        @Override
+        public void call(String json) {
+          Logger.d(json);
+          JSONObject jsonObj = null;
+          try {
+            jsonObj = new JSONObject(json);
+            int responseCode = jsonObj.getInt("response_code");
+            if (responseCode == 201) {
+              String json2 = jsonObj.getString("value");
+              JSONObject jsonObject2 = new JSONObject(json2);
+              int time = jsonObject2.getInt("time") * 1000;
+              go(time);
+            } else {
+              stop();
+              hAlert.show(getActivity(), jsonObj.getString("error_message"));
+            }
+          } catch (JSONException e) {
+            e.printStackTrace();
           }
-        } catch (JSONException e) {
-          e.printStackTrace();
         }
-      }
-    });
+      });
+    }
   }
 
   @Override
   public void onSupportInvisible() {
+    Logger.d("called");
     super.onSupportInvisible();
     stop();
   }
