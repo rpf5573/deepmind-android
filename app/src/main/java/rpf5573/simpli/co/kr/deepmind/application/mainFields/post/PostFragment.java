@@ -179,6 +179,10 @@ public class PostFragment extends BaseFragment implements PermissionCallbacks, B
         if ( realPath == null ) {
           hAlert.show(getActivity(), "출처가 올바르지 않습니다. 앱에서 찍은 사진/영상만 업로드 해주세요");
         } else {
+          if ( ! realPath.contains(DEEPMIND_DIRECTORY_NAME) ) {
+            hAlert.show(getActivity(), "딥마인드 앱에서 찍은 사진/영상만 사용 가능 합니다");
+            return;
+          }
           fileUri = Uri.parse(realPath);
           File f = new File(fileUri.getPath());
           long size = f.length();
