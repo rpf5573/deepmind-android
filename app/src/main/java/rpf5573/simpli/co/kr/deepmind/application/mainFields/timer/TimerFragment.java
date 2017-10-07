@@ -174,6 +174,7 @@ public class TimerFragment extends SupportFragment {
         }
         @Override
         public void onFinish() {
+          Logger.d("called");
           updateColor(Color.RED);
           countUpTimer = new CountUpTimer(0 , 62) {
             @Override
@@ -198,9 +199,9 @@ public class TimerFragment extends SupportFragment {
   }
   private void stop() {
     Logger.d("called");
-    minTV.setText("00");
-    secTV.setText("00");
-    miliTV.setText("00");
+    minTV.setText(R.string.zero_time);
+    secTV.setText(R.string.zero_time);
+    miliTV.setText(R.string.zero_time);
     updateColor(Color.BLACK);
     if (countDownTimer != null) {
       countDownTimer.cancel();
