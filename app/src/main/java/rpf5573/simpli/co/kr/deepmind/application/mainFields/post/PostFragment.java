@@ -106,7 +106,7 @@ public class PostFragment extends BaseFragment implements PermissionCallbacks, B
     static final int CAPTURE_VIDEO = 7;
     static final int GALLERY = 8;
   }
-  static final String IMAGE_DIRECTORY_NAME = "deepmind";
+  static final String DEEPMIND_DIRECTORY_NAME = "deepmind";
   static final String[] PERMISSIONS = {permission.RECORD_AUDIO, permission.WRITE_EXTERNAL_STORAGE, permission.CAMERA};
 
   //  view component
@@ -183,7 +183,7 @@ public class PostFragment extends BaseFragment implements PermissionCallbacks, B
           File f = new File(fileUri.getPath());
           long size = f.length();
           int kb = (int)(size/1000);
-          int mb = (int)(kb/1000);
+          int mb = kb/1000;
           if ( mb > 90 ) {
             hAlert.show(getActivity(), "파일의 용량이 너무 큽니다");
           } else {
@@ -544,7 +544,7 @@ public class PostFragment extends BaseFragment implements PermissionCallbacks, B
   private File getMediaFile(int type){
     File mediaStorageDir = new File(
         Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM),
-        IMAGE_DIRECTORY_NAME);
+        DEEPMIND_DIRECTORY_NAME);
     if(!mediaStorageDir.exists()){
       Logger.d("mediaStorageDir 가 없습니다.");
       if(!mediaStorageDir.mkdir()){
@@ -561,7 +561,7 @@ public class PostFragment extends BaseFragment implements PermissionCallbacks, B
       mediaFile = new File(mediaStorageDir.getPath() + File.separator
           + fileName);
     }else if(type == MediaType.VIDEO){
-      fileName = mSettings.instance.our_team+"Team_VIDEO_"+timeStamp+".mp4";
+      fileName = mSettings.instance.our_team+"Team_VIDEO_"+timeStamp+"_c.mp4";
       mediaFile = new File(mediaStorageDir.getPath() + File.separator
           + fileName);
     }
