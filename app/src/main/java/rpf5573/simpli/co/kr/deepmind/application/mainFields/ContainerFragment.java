@@ -163,7 +163,7 @@ public class ContainerFragment extends BaseFragment implements PermissionCallbac
   public boolean onBackPressedSupport() {
 
     if ( hLoadingView.isShowing() ) {
-      hAlert.show(getActivity(), "무인 미션 찾기를 멈추겠습니다", new SingleButtonCallback() {
+      hAlert.show(getActivity(), "무인 미션 찾기를 중지하겠습니다", new SingleButtonCallback() {
         @Override
         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
           stopBeacon();
