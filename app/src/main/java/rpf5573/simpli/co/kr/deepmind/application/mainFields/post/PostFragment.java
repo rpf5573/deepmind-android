@@ -1,6 +1,8 @@
 package rpf5573.simpli.co.kr.deepmind.application.mainFields.post;
 
 import static android.view.View.GONE;
+import static java.lang.Character.getNumericValue;
+
 import android.Manifest;
 import android.Manifest.permission;
 import android.app.Activity;
@@ -179,8 +181,17 @@ public class PostFragment extends BaseFragment implements PermissionCallbacks, B
         if ( realPath == null ) {
           hAlert.show(getActivity(), "출처가 올바르지 않습니다. 앱에서 찍은 사진/영상만 업로드 해주세요");
         } else {
+          // 딥마인드 앱이 아닌, 다른곳에서 찍거나 다운받은 미디어 자료를 띄우는것을 방지
           if ( ! realPath.contains(DEEPMIND_DIRECTORY_NAME) ) {
             hAlert.show(getActivity(), "딥마인드 앱에서 찍은 사진/영상만 사용 가능 합니다");
+            return;
+          }
+          // 현재 우리팀이 아닌 다른팀에서 찍은 미디어 자료를 띄우는것을 방지
+          // 실제 교육현장에서는 잘 일어나지 않는 case이지만, 테스트할 때 아빠나 다른 교관분들이 햇갈릴 소지가 있어서 대응해놓음
+          String filename = FileUtils.getFileName(realPath);
+          int file_owner = Character.getNumericValue(filename.charAt(0));
+          if ( file_owner != mSettings.instance.our_team ) {
+            hAlert.show(getActivity(), "현재 팀에서 찍은 영상이 아닙니다");
             return;
           }
           fileUri = Uri.parse(realPath);
