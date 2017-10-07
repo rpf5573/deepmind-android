@@ -28,6 +28,7 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.daimajia.swipe.SwipeLayout.SwipeListener;
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
 import com.orhanobut.logger.Logger;
 import java.util.ArrayList;
@@ -62,6 +63,7 @@ class OutListAdapter extends RecyclerSwipeAdapter<OutListAdapter.ViewHolder> {
 
   //  view component
   /* ------------------------------------ */
+  RecyclerView recyclerView;
 
   //  data
   /* ------------------------------------ */
@@ -83,10 +85,11 @@ class OutListAdapter extends RecyclerSwipeAdapter<OutListAdapter.ViewHolder> {
   @Override
   public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     SwipeLayout v = (SwipeLayout) LayoutInflater.from(context).inflate(R.layout.outlist_fragment_cell, parent, false);
-    return new ViewHolder(v, context, swipeLayoutClickListener, outClickListener);
+    return new ViewHolder(v, context, swipeLayoutClickListener, outClickListener, swipeListener);
   }
   @Override
   public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+    this.recyclerView = recyclerView;
     super.onAttachedToRecyclerView(recyclerView);
   }
   @Override
@@ -165,6 +168,44 @@ class OutListAdapter extends RecyclerSwipeAdapter<OutListAdapter.ViewHolder> {
       }
     }
   };
+  private SwipeListener swipeListener = new SwipeListener() {
+    @Override
+    public void onStartOpen(SwipeLayout layout) {
+      Logger.d("called");
+      int cell_count = recyclerView.getChildCount();
+      for ( int i = 0; i < cell_count; i++ ) {
+        SwipeLayout swipeLayout = (SwipeLayout)recyclerView.getChildAt(i);
+        if ( ! swipeLayout.equals(layout) ) {
+          swipeLayout.close();
+        }
+      }
+    }
+
+    @Override
+    public void onOpen(SwipeLayout layout) {
+      Logger.d("called");
+    }
+
+    @Override
+    public void onStartClose(SwipeLayout layout) {
+      Logger.d("called");
+    }
+
+    @Override
+    public void onClose(SwipeLayout layout) {
+      Logger.d("called");
+    }
+
+    @Override
+    public void onUpdate(SwipeLayout layout, int leftOffset, int topOffset) {
+      Logger.d("called");
+    }
+
+    @Override
+    public void onHandRelease(SwipeLayout layout, float xvel, float yvel) {
+      Logger.d("called");
+    }
+  };
 
   //  custom
   /* ------------------------------------ */
@@ -175,12 +216,15 @@ class OutListAdapter extends RecyclerSwipeAdapter<OutListAdapter.ViewHolder> {
     SwipeLayout root;
     Context context;
     ImageView silence;
-    ViewHolder(View root, Context context, OnClickListener swipeLayoutClickListener, OnClickListener outClickListener) {
+    ViewHolder(View root, Context context, OnClickListener swipeLayoutClickListener, OnClickListener outClickListener, SwipeListener swipeListener) {
       super(root);
       this.root = (SwipeLayout) root;
       this.context = context;
       surface = this.root.findViewById(R.id.outlist__cell__surface);
+
       this.root.findViewById(R.id.outlist__cell__surface).setOnClickListener(swipeLayoutClickListener);
+
+      this.root.addSwipeListener(swipeListener);
       nameTextView = (TextView) this.root.findViewById(R.id.outlist__cell__name);
       outBtn = (Button) this.root.findViewById(R.id.outlist__cell__out);
       outBtn.setOnClickListener(outClickListener);
