@@ -16,6 +16,7 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.daimajia.swipe.SwipeLayout;
+import com.daimajia.swipe.SwipeLayout.SwipeListener;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.orhanobut.logger.Logger;
@@ -52,6 +53,7 @@ class PostListAdapter extends Adapter<ViewHolder> {
 
   //  view component
   /* ------------------------------------ */
+  private RecyclerView recyclerView;
 
   //  data
   /* ------------------------------------ */
@@ -76,7 +78,7 @@ class PostListAdapter extends Adapter<ViewHolder> {
     View cell = LayoutInflater.from(context).inflate(R.layout.postlist_fragment_cell, parent, false);
     cell.findViewById(R.id.postlist__cell__surface).setOnClickListener(swipeLayoutClickListener);
     cell.findViewById(R.id.postlist__cell__select).setOnClickListener(postSelectListener);
-    return new ViewHolder(context, cell);
+    return new ViewHolder(context, cell, swipeListener);
   }
   @Override
   public void onBindViewHolder(ViewHolder holder, int position) {
@@ -99,6 +101,7 @@ class PostListAdapter extends Adapter<ViewHolder> {
 
   @Override
   public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+    this.recyclerView = recyclerView;
     super.onAttachedToRecyclerView(recyclerView);
   }
   //  setup
@@ -144,6 +147,40 @@ class PostListAdapter extends Adapter<ViewHolder> {
       ((SwipeLayout)(v.getParent())).toggle(true);
     }
   };
+  private SwipeListener swipeListener = new SwipeListener() {
+    @Override
+    public void onStartOpen(SwipeLayout layout) {
+      Logger.d("called");
+      int cell_count = recyclerView.getChildCount();
+      for ( int i = 0; i < cell_count; i++ ) {
+        SwipeLayout swipeLayout = (SwipeLayout)recyclerView.getChildAt(i);
+        if ( ! swipeLayout.equals(layout) ) {
+          swipeLayout.close();
+        }
+      }
+    }
+    @Override
+    public void onOpen(SwipeLayout layout) {
+      Logger.d("called");
+    }
+    @Override
+    public void onStartClose(SwipeLayout layout) {
+      Logger.d("called");
+    }
+    @Override
+    public void onClose(SwipeLayout layout) {
+      Logger.d("called");
+    }
+    @Override
+    public void onUpdate(SwipeLayout layout, int leftOffset, int topOffset) {
+      Logger.d("called");
+    }
+    @Override
+    public void onHandRelease(SwipeLayout layout, float xvel, float yvel) {
+      Logger.d("called");
+    }
+  };
+
 
   //  custom
   /* ------------------------------------ */
@@ -185,11 +222,12 @@ class PostListAdapter extends Adapter<ViewHolder> {
     Button select;
     TextView post;
     TextView hosts;
-    ViewHolder(Context context, View root) {
+    ViewHolder(Context context, View root, SwipeListener swipeListener) {
       super(root);
       this.root = (SwipeLayout) root;
       this.context = context;
       this.surface = this.root.findViewById(R.id.postlist__cell__surface);
+      this.root.addSwipeListener(swipeListener);
       select = (Button) this.root.findViewById(R.id.postlist__cell__select);
       post = (TextView) this.root.findViewById(R.id.postlist__cell__surface__post);
       hosts = (TextView) this.root.findViewById(R.id.postlist__cell__surface__hosts);
