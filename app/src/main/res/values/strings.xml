@@ -24,4 +24,5 @@
   <string name="select">선택</string>
   <string name="postSelect">포스트선택</string>
   <string name="colon">:</string>
+  <string name="zero_time">00</string>
 </resources>
