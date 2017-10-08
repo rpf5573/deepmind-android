@@ -92,7 +92,7 @@ public class LogInActivity extends AppCompatActivity implements PermissionCallba
     setup();
     final String[] perms = {permission.RECORD_AUDIO, permission.WRITE_EXTERNAL_STORAGE, permission.ACCESS_COARSE_LOCATION, permission.CAMERA};
     if ( ! EasyPermissions.hasPermissions(this, perms) ) {
-      hAlert.show(this, "원활한 교육 진행을 위해서 권한획득이 필요합니다. <Allow> 버튼을 눌러주세요", new SingleButtonCallback() {
+      hAlert.show(this, "원활한 교육 진행을 위해서 권한획득이 필요합니다. <허용> 버튼을 눌러주세요", new SingleButtonCallback() {
         @Override
         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
           EasyPermissions.requestPermissions(LogInActivity.this, "원활한 교육 진행을 위해서 권한획득이 필요합니다", 3325, perms);

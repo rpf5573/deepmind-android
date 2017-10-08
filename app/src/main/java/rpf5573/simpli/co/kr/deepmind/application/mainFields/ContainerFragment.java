@@ -161,7 +161,6 @@ public class ContainerFragment extends BaseFragment implements PermissionCallbac
   }
   @Override
   public boolean onBackPressedSupport() {
-
     if ( hLoadingView.isShowing() ) {
       hAlert.show(getActivity(), "무인 미션 찾기를 중지하겠습니다", new SingleButtonCallback() {
         @Override
