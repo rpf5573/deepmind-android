@@ -4,6 +4,7 @@
 
   <item name="login_activity" type="id"/>
   <item name="login__container" type="id"/>
+  <item name="login__company_logo" type="id"/>
   <item name="login__verticalStackView" type="id"/>
   <item name="login__passwordEditText" type="id"/>
   <item name="login__completeBtn" type="id"/>

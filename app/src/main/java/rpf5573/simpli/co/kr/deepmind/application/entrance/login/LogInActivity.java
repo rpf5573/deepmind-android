@@ -4,6 +4,7 @@ import android.Manifest;
 import android.Manifest.permission;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -19,6 +20,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -30,6 +32,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.blankj.utilcode.util.Utils;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.Key;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.signature.ObjectKey;
+import com.github.chrisbanes.photoview.PhotoViewAttacher;
 import com.google.gson.Gson;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
@@ -74,6 +86,7 @@ public class LogInActivity extends AppCompatActivity implements PermissionCallba
   EditText loginEditText;
   Button loginCompleteBtn;
   Toolbar toolbar;
+  ImageView companyLogo;
 
   //  data
   /* ------------------------------------ */
@@ -145,6 +158,7 @@ public class LogInActivity extends AppCompatActivity implements PermissionCallba
     loginEditText = (EditText) findViewById(R.id.login__passwordEditText);
     loginCompleteBtn = (Button) findViewById(R.id.login__completeBtn);
     setupToolbar();
+    setupCompanyLogo();
     setupFragmentation();
     setupCompleteBtn();
     setupIndicatorView();
@@ -152,6 +166,29 @@ public class LogInActivity extends AppCompatActivity implements PermissionCallba
   public void setupToolbar() {
     toolbar = (Toolbar) findViewById(R.id.toolbar);
     toolbar.setTitle(R.string.app_name);
+  }
+  public void setupCompanyLogo() {
+    companyLogo = (ImageView)findViewById(R.id.login__company_logo);
+    String imgUrl = hRequestQueue.BASE_URL+"/Company/company.jpg";
+    Key key = new ObjectKey(String.valueOf(System.currentTimeMillis()));
+    RequestOptions requestOptions = new RequestOptions().signature(key);
+    Glide.with(this)
+        .load(imgUrl)
+        .apply(requestOptions)
+        .listener(new RequestListener<Drawable>() {
+          @Override
+          public boolean onLoadFailed(@Nullable GlideException e, Object model,
+              Target<Drawable> target,
+              boolean isFirstResource) {
+            return false;
+          }
+          @Override
+          public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target,
+              DataSource dataSource, boolean isFirstResource) {
+            companyLogo.setImageDrawable(resource);
+            return false;
+          }
+        }).into(companyLogo);
   }
   public void setupFragmentation() {
     Fragmentation.builder()
