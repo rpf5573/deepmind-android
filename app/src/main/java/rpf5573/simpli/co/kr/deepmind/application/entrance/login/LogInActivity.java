@@ -2,6 +2,7 @@ package rpf5573.simpli.co.kr.deepmind.application.entrance.login;
 
 import android.Manifest;
 import android.Manifest.permission;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -60,6 +61,7 @@ import rpf5573.simpli.co.kr.deepmind.R;
 import rpf5573.simpli.co.kr.deepmind.application.entrance.registers.RegisterActivity;
 import rpf5573.simpli.co.kr.deepmind.application.mainFields.MainFieldsActivity;
 import rpf5573.simpli.co.kr.deepmind.helper.hAlert;
+import rpf5573.simpli.co.kr.deepmind.helper.hCallBack;
 import rpf5573.simpli.co.kr.deepmind.helper.hColor;
 import rpf5573.simpli.co.kr.deepmind.helper.hEnum;
 import rpf5573.simpli.co.kr.deepmind.helper.hEnum.activity;
@@ -157,43 +159,45 @@ public class LogInActivity extends AppCompatActivity implements PermissionCallba
     Utils.init(getApplicationContext());
     loginEditText = (EditText) findViewById(R.id.login__passwordEditText);
     loginCompleteBtn = (Button) findViewById(R.id.login__completeBtn);
+    findViewById(R.id.login_activity).setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        hideKeyboard(LogInActivity.this);
+      }
+    });
     setupToolbar();
-    setupCompanyLogo();
     setupFragmentation();
     setupCompleteBtn();
     setupIndicatorView();
+    setupCompanyLogo();
   }
   public void setupToolbar() {
     toolbar = (Toolbar) findViewById(R.id.toolbar);
     toolbar.setTitle(R.string.app_name);
   }
-  public void setupCompanyLogo() {
-    companyLogo = (ImageView)findViewById(R.id.login__company_logo);
-    String imgUrl = hRequestQueue.BASE_URL+"/Company/company.jpg";
-    Key key = new ObjectKey(String.valueOf(System.currentTimeMillis()));
-    RequestOptions requestOptions = new RequestOptions().signature(key);
-    Glide.with(this)
-        .load(imgUrl)
-        .apply(requestOptions)
-        .listener(new RequestListener<Drawable>() {
-          @Override
-          public boolean onLoadFailed(@Nullable GlideException e, Object model,
-              Target<Drawable> target,
-              boolean isFirstResource) {
-            return false;
-          }
-          @Override
-          public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target,
-              DataSource dataSource, boolean isFirstResource) {
-            companyLogo.setImageDrawable(resource);
-            return false;
-          }
-        }).into(companyLogo);
-  }
   public void setupFragmentation() {
     Fragmentation.builder()
         .stackViewMode(Fragmentation.SHAKE)
         .install();
+  }
+  public void setupCompanyLogo() {
+    getCompanyLogoImageName(new hCallBack() {
+      @Override
+      public void call(String json) {
+        Logger.d(json);
+        JSONObject jsonObj = null;
+        try {
+          jsonObj = new JSONObject( json );
+          int responseCode = jsonObj.getInt("response_code");
+          if ( responseCode == 201 ) {
+            String filename = jsonObj.getString( "value" );
+            setCompanyLogo(filename);
+          }
+        } catch (JSONException e) {
+          e.printStackTrace();
+        }
+      }
+    });
   }
   public void setupCompleteBtn() {
     loginCompleteBtn.setOnClickListener(new OnClickListener() {
@@ -327,5 +331,61 @@ public class LogInActivity extends AppCompatActivity implements PermissionCallba
   public void hideKeyboard() {
     InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
     imm.hideSoftInputFromWindow(loginEditText.getWindowToken(), 0);
+  }
+  public void getCompanyLogoImageName(final hCallBack cb) {
+    String url = hRequestQueue.BASE_URL+"/login.php";
+    hRequestQueue.getInstance(getApplicationContext())
+        .add(new StringRequest(Request.Method.POST, url,
+            new Response.Listener<String>() {
+              @Override
+              public void onResponse(String response) {
+                cb.call(response);
+              }
+            }, new Response.ErrorListener() {
+          @Override
+          public void onErrorResponse(VolleyError e) {
+            e.printStackTrace();
+          }
+        }) {
+          @Override
+          public Map<String, String> getParams() {
+            Map<String, String> params = new HashMap<>();
+            params.put("company_logo", "giveme");
+            return params;
+          }
+        });
+  }
+  public void setCompanyLogo(String filename) {
+    companyLogo = (ImageView)findViewById(R.id.login__company_logo);
+    String imgUrl = hRequestQueue.BASE_URL+"/Company/" + filename;
+    Key key = new ObjectKey(String.valueOf(System.currentTimeMillis()));
+    RequestOptions requestOptions = new RequestOptions().signature(key);
+    Glide.with(this)
+        .load(imgUrl)
+        .apply(requestOptions)
+        .listener(new RequestListener<Drawable>() {
+          @Override
+          public boolean onLoadFailed(@Nullable GlideException e, Object model,
+              Target<Drawable> target,
+              boolean isFirstResource) {
+            return false;
+          }
+          @Override
+          public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target,
+              DataSource dataSource, boolean isFirstResource) {
+            companyLogo.setImageDrawable(resource);
+            return false;
+          }
+        }).into(companyLogo);
+  }
+  public static void hideKeyboard(Activity activity) {
+    InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+    //Find the currently focused view, so we can grab the correct window token from it.
+    View view = activity.getCurrentFocus();
+    //If no view currently has focus, create a new one, just so we can grab a window token from it
+    if (view == null) {
+      view = new View(activity);
+    }
+    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
   }
 }
