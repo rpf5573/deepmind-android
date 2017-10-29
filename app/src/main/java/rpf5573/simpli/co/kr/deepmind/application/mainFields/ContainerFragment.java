@@ -331,14 +331,14 @@ public class ContainerFragment extends BaseFragment implements PermissionCallbac
             Beacon nearestBeacon = list.get(0);
             final int minor = nearestBeacon.getMinor();
             Logger.d(minor);
-            if ( minor > 200 ) {
+            if ( minor > 100 ) {
               final int txPower = nearestBeacon.getMeasuredPower();
               final int rssi = nearestBeacon.getRssi();
               final float distance = (float) calculateDistance(txPower, rssi);
               final int proximity = getProximity(distance);
               Logger.d("proximity ==> "+proximity);
               if ( proximity == IMMEDIATE ) {
-                if ( minor == (post+200) ) {
+                if ( minor == (post+100) ) {
 
                   final String url = mSettings.instance.beacon_infos.get(post - 1).url;
                   Logger.d(url);
