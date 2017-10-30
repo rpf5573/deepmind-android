@@ -339,12 +339,12 @@ public class ContainerFragment extends BaseFragment implements PermissionCallbac
               Logger.d("proximity ==> "+proximity);
               if ( proximity == IMMEDIATE ) {
                 if ( minor == (post+100) ) {
-
-                  final String url = mSettings.instance.beacon_infos.get(post - 1).url;
-                  Logger.d(url);
-
-                  callBack.call(url);
-
+                  for (mBeaconInfo beaconInfo: mSettings.instance.beacon_infos) {
+                    if ( beaconInfo.post == post && beaconInfo.url != null ) {
+                      callBack.call(beaconInfo.url);
+                      return;
+                    }
+                  }
                 }
               }
             }
