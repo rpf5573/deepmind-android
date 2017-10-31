@@ -52,6 +52,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import me.yokeyword.fragmentation.SupportFragment;
+import net.gotev.uploadservice.Logger.LoggerDelegate;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.json.JSONException;
@@ -330,14 +331,12 @@ public class ContainerFragment extends BaseFragment implements PermissionCallbac
           if ( ! list.isEmpty() ) {
             Beacon nearestBeacon = list.get(0);
             final int minor = nearestBeacon.getMinor();
-            Logger.d(minor);
             if ( minor > 100 ) {
               final int txPower = nearestBeacon.getMeasuredPower();
               final int rssi = nearestBeacon.getRssi();
               final float distance = (float) calculateDistance(txPower, rssi);
               final int proximity = getProximity(distance);
-              Logger.d("proximity ==> "+proximity);
-              if ( proximity == IMMEDIATE ) {
+              if ( proximity <= NEAR ) {
                 if ( minor == (post+100) ) {
                   for (mBeaconInfo beaconInfo: mSettings.instance.beacon_infos) {
                     if ( beaconInfo.post == post && beaconInfo.url != null ) {
@@ -399,8 +398,8 @@ public class ContainerFragment extends BaseFragment implements PermissionCallbac
     }
   }
   public int getProximity( float distance ) {
-    if ( distance <= 10 ) { return 1; }
-    if ( distance <= 15 ) { return 2; }
+    if ( distance <= 5 ) { return 1; }
+    if ( distance <= 10 ) { return 2; }
     if ( distance <= 20 ) { return 3; }
     return 4;
   }
