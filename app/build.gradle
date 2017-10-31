@@ -7,8 +7,8 @@ android {
         applicationId "rpf5573.simpli.co.kr.deepmind"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 12
-        versionName "2.2"
+        versionCode 15
+        versionName "2.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -51,5 +51,5 @@ dependencies {
     compile 'pub.devrel:easypermissions:1.0.0'
     compile 'mbanje.kurt:fabbutton:1.2.4@aar'
     compile 'net.gotev:uploadservice-okhttp:3.4'
-    compile 'com.estimote:sdk:1.0.3:release@aar'
+    compile 'com.estimote:sdk:1.4.0'
 }
