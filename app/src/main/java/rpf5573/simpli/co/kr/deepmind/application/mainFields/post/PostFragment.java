@@ -42,6 +42,7 @@ import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -536,17 +537,25 @@ public class PostFragment extends BaseFragment implements PermissionCallbacks, B
   }
   private void setPicture(Uri fileUri) {
     File file = new File(fileUri.getPath());
-    try {
-      InputStream ims = new FileInputStream(file);
-      Bitmap rotatedBitmap = rotateImage(BitmapFactory.decodeStream(ims), fileUri);
-      if ( rotatedBitmap != null ) {
-        imageView.setImageBitmap( rotatedBitmap );
-      } else {
-        hAlert.show(getActivity(), "이미지 회전 실패");
-      }
-    } catch (FileNotFoundException e) {
-      Logger.e(e.getMessage());
-    }
+    Glide.with(this).load(file).into(imageView);
+//    long size = file.length();
+//    try {
+//      InputStream ims = new FileInputStream(file);
+//      Logger.d("called - 1");
+//      Bitmap bitmap = BitmapFactory.decodeStream(ims);
+//      Logger.d("called - 2");
+//      ByteArrayOutputStream bmpStream = new ByteArrayOutputStream();
+//      bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bmpStream);
+//      Logger.d("called - 3");
+//      Bitmap rotatedBitmap = rotateImage(bitmap, fileUri);
+//      if ( rotatedBitmap != null ) {
+//        imageView.setImageBitmap( rotatedBitmap );
+//      } else {
+//        hAlert.show(getActivity(), "이미지 회전 실패");
+//      }
+//    } catch (FileNotFoundException e) {
+//      Logger.e(e.getMessage());
+//    }
   }
   private void setVideo(Uri fileUri) {
     Logger.d(fileUri);
