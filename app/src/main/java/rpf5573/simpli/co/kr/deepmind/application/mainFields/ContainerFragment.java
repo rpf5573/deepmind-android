@@ -272,7 +272,7 @@ public class ContainerFragment extends BaseFragment implements PermissionCallbac
             EasyPermissions
                 .requestPermissions(getActivity(), "위치정보 접근을 허용해주세요", REQUESTCODE_LOCATION, perms);
           } else {
-            hLoadingView.show(getActivity());
+            hLoadingView.show(getActivity(), "최대20초 정도 기다려도 정보를 찾지 못하면 뒤로가기후 다시 미션정보찾기를 누릅니다");
             getCurrentPostFromServer(new hCallBack() {
               @Override
               public void call(String json) {
