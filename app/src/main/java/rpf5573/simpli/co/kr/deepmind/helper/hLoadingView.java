@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import com.orhanobut.logger.Logger;
 import rpf5573.simpli.co.kr.deepmind.R;
 
@@ -17,11 +18,11 @@ import rpf5573.simpli.co.kr.deepmind.R;
 public class hLoadingView extends RelativeLayout {
   public static hLoadingView instance = null;
 
-  public static void show(Activity activity) {
+  public static void show(Activity activity, String message) {
     if ( instance == null ) {
       LayoutInflater inflater = (LayoutInflater)activity.getLayoutInflater();
       instance = (hLoadingView)inflater.inflate(R.layout.loading_view, null);
-      Logger.d( instance );
+      ((TextView)instance.findViewById(R.id.message_view)).setText(message);
       WindowManager.LayoutParams params_wm = new WindowManager.LayoutParams(
           WindowManager.LayoutParams.MATCH_PARENT,
           WindowManager.LayoutParams.MATCH_PARENT
