@@ -9,6 +9,7 @@ import java.util.HashMap;
 
 public class mSettings {
   public static mSettings instance = null;
+  public Integer version;
   public Integer total_team_count;
   public mOptions options;
   public String[] joker_info_questions;
