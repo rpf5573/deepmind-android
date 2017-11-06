@@ -210,6 +210,7 @@ public class LogInActivity extends AppCompatActivity implements PermissionCallba
           Toast.makeText(getApplicationContext(), "비밀번호를 입력해 주세요", Toast.LENGTH_SHORT).show();
           loginCompleteBtn.setEnabled(true);
         } else {
+          changeBaseUrlBasedOn(password);
           sendPasswordToServer(password);
         }
       }
@@ -387,5 +388,10 @@ public class LogInActivity extends AppCompatActivity implements PermissionCallba
       view = new View(activity);
     }
     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+  }
+  private void changeBaseUrlBasedOn(String password) {
+    if ( String.valueOf(password.substring(0, 1)).equals("2") ) {
+      hRequestQueue.BASE_URL = "http://www.xn--2-on9eihq3ouuu.com/User";
+    }
   }
 }
