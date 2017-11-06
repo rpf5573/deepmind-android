@@ -257,8 +257,6 @@ public class ContainerFragment extends BaseFragment implements PermissionCallbac
   OnClickListener beaconFindingBtnClickListener = new OnClickListener() {
     @Override
     public void onClick(View v) {
-
-
       // 블루투스 체크
       if (bluetoothAdapter == null) {
         hAlert.show(getActivity(), "이 기기는 블루투스를 지원하지 않습니다");
@@ -324,6 +322,8 @@ public class ContainerFragment extends BaseFragment implements PermissionCallbac
   }
   public void findBeacon( final int post, final hCallBack callBack ) {
     if (SystemRequirementsChecker.checkWithDefaultDialogs(getActivity())) {
+      final int version = mSettings.instance.version * 100;
+      Logger.d(version);
       this.beaconManager = new BeaconManager(getActivity());
       beaconManager.setRangingListener(new BeaconRangingListener() {
         @Override
@@ -331,13 +331,13 @@ public class ContainerFragment extends BaseFragment implements PermissionCallbac
           if ( ! list.isEmpty() ) {
             Beacon nearestBeacon = list.get(0);
             final int minor = nearestBeacon.getMinor();
-            if ( minor > 100 ) {
+            if ( minor > version ) {
               final int txPower = nearestBeacon.getMeasuredPower();
               final int rssi = nearestBeacon.getRssi();
               final float distance = (float) calculateDistance(txPower, rssi);
               final int proximity = getProximity(distance);
               if ( proximity <= NEAR ) {
-                if ( minor == (post+100) ) {
+                if ( minor == (post+version) ) {
                   for (mBeaconInfo beaconInfo: mSettings.instance.beacon_infos) {
                     if ( beaconInfo.post == post && beaconInfo.url != null ) {
                       callBack.call(beaconInfo.url);
