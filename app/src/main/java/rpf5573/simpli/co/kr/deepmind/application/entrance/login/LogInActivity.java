@@ -169,7 +169,7 @@ public class LogInActivity extends AppCompatActivity implements PermissionCallba
     setupFragmentation();
     setupCompleteBtn();
     setupIndicatorView();
-    setupCompanyLogo();
+    //setupCompanyLogo(); because of login system
   }
   public void setupToolbar() {
     toolbar = (Toolbar) findViewById(R.id.toolbar);
