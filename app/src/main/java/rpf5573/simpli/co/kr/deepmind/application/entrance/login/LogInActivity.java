@@ -278,6 +278,7 @@ public class LogInActivity extends AppCompatActivity implements PermissionCallba
 
       if ( responseCode == 201 ) {
         mSettings.instance = gson.fromJson(jsonObj.getString("value"), mSettings.class);
+        Logger.d(mSettings.instance.version);
         if ( mSettings.instance.options.player_list ) {
           goToActivity(activity.register);
         } else {
