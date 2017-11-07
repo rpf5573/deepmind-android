@@ -391,8 +391,15 @@ public class LogInActivity extends AppCompatActivity implements PermissionCallba
     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
   }
   private void changeBaseUrlBasedOn(String password) {
-    if ( String.valueOf(password.substring(0, 1)).equals("2") ) {
+    String version = String.valueOf(password.substring(0, 1));
+    if ( version.equals("2") ) {
       hRequestQueue.BASE_URL = "http://www.xn--2-on9eihq3ouuu.com/User";
+    }
+    else if ( version.equals("3") ) {
+      hRequestQueue.BASE_URL = "http://www.xn--3-on9eihq3ouuu.com/User";
+    }
+    else if ( version.equals("4") ) {
+      hRequestQueue.BASE_URL = "http://www.xn--4-on9eihq3ouuu.com/User";
     }
   }
 }
